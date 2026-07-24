@@ -1,221 +1,235 @@
-# Vault
+<p align="center">
+  <img src="assets/app_icon.png" alt="Vault" width="140" />
+</p>
 
-**Leitor de PDF e banda desenhada** — biblioteca local, conta na cloud, sync, TTS offline e leitura sem ruído.
+<h1 align="center">Vault</h1>
 
 <p align="center">
-  <img src="assets/app_icon.png" alt="Vault" width="120" />
+  <strong>O teu espaço para ler PDFs e banda desenhada</strong><br/>
+  No PC ou no Linux — com a biblioteca no teu dispositivo e a progresso a acompanhar-te.
 </p>
 
 <p align="center">
-  <code>hq_reader</code> · v<strong>2.0.1</strong> (+24) · Flutter / Dart&nbsp;3.11
+  <img alt="versão" src="https://img.shields.io/badge/versão-2.0.1-6B4F3A?style=for-the-badge" />
+  <img alt="Windows" src="https://img.shields.io/badge/Windows-PC-0078D4?style=for-the-badge&logo=windows&logoColor=white" />
+  <img alt="Linux" src="https://img.shields.io/badge/Linux-Desktop-FCC624?style=for-the-badge&logo=linux&logoColor=black" />
+  <img alt="Flutter" src="https://img.shields.io/badge/feito_com-Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white" />
 </p>
 
 ---
 
-## Visão geral
+## O que é o Vault?
 
-Vault é um cliente Flutter para ler **PDFs** e **comics** (CBZ / CBR) no dispositivo. Os ficheiros ficam contigo; a cloud guarda progresso, anotações e preferências — nunca os binários.
+Imagina uma **estante digital só tua**: importas os teus ficheiros, organizas a biblioteca, retomas a leitura onde paraste e — se quiseres — ouves o texto em voz alta.
 
-| Capacidade | Detalhe |
+Os livros e comics **ficam no teu computador**. A conta online serve para sincronizar progresso, anotações e preferências entre dispositivos — **sem enviar os ficheiros** para a cloud.
+
+<br/>
+
+<table>
+  <tr>
+    <td width="50%" valign="top">
+
+### Ler com conforto
+- PDFs e comics (CBZ, CBR)
+- Marcadores, notas e grifos
+- Busca no texto e sumário
+- Temas e modo mãos-livres
+
+    </td>
+    <td width="50%" valign="top">
+
+### Ouvir e acompanhar
+- Vozes em português (incluídas)
+- Timer de sono para pausar sozinho
+- Estatísticas da tua leitura
+- Tradução rápida de palavras
+
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+
+### A tua biblioteca
+- Capas e pastas / estantes
+- Progresso guardado
+- Sync opcional com conta
+- Funciona também offline
+
+    </td>
+    <td width="50%" valign="top">
+
+### Comunidade (se quiseres)
+- Perfil e estante pública *opt-in*
+- Discover com tendências
+- Só metadados — sem downloads
+- Controlo total da privacidade
+
+    </td>
+  </tr>
+</table>
+
+> **Nota:** o Vault **não** descarrega conteúdo de sites de pirataria. Tu trazes os teus próprios ficheiros.
+
+---
+
+## Para quem é?
+
+| Queres… | Vault ajuda assim |
 |---|---|
-| Formatos | PDF, CBZ/ZIP, CBR/RAR |
-| Leitura | Grifos, notas, marcadores, busca, sumário (PDF) |
-| Ouvir | TTS offline Piper (Sherpa ONNX) · vozes PT-BR incluídas |
-| Conta | Login, sync LWW, refresh JWT, estatísticas |
-| Extra | Tradução / dicionário, Discover, social opt-in, multi-idioma |
-
-> **Produto:** sem download de conteúdo pirata no cliente. Discover e social mostram só metadados / rankings.
-
-Backend NestJS: repositório separado **`valt-back`**.
+| Ler HQs e PDFs no PC | Abre, importa, lê em ecrã inteiro |
+| Continuar noutro dispositivo | Conta + sync de progresso e notas |
+| Ouvir enquanto fazes outra coisa | Modo voz com timer de sono |
+| Ver quanto lês | Ecrã “A minha leitura” com metas e streak |
+| Manter tudo privado | Social desligado por defeito |
 
 ---
 
-## Plataformas
+## Versões de secretária
 
-| | Pasta | Binário |
-|---|---|---|
-| **Windows (PC)** | [`windows/`](windows/) | `hq_reader.exe` |
-| **Linux** | [`linux/`](linux/) | `hq_reader` |
-| Android · iOS · Web · macOS | presentes no repo | Flutter standard |
+<p align="center">
 
-Este README foca **Windows** e **Linux**.
+| | **Windows** | **Linux** |
+|:---:|:---:|:---:|
+| **Para** | PC com Windows 10 ou 11 | Desktop Linux (Ubuntu e afins) |
+| **App** | `hq_reader.exe` | `hq_reader` |
+| **Ideal para** | Uso diário no portátil / secretária | Quem prefere ambiente Linux |
+
+</p>
+
+Também existem builds para telemóvel e web no mesmo projecto — mas o foco deste guia é **PC Windows** e **Linux**.
 
 ---
 
-## Requisitos comuns
+## Como começar (passo a passo)
 
-- [Flutter](https://docs.flutter.dev/get-started/install) **stable** (testado: **3.41.x** / Dart **3.11.x**)
-- SDK Dart `^3.11.1` (ver `pubspec.yaml`)
-- Git
+### 1. Preparar o ambiente
+
+Precisas do [Flutter](https://docs.flutter.dev/get-started/install) instalado (versão estável recente).
+
+No terminal, dentro da pasta do projecto:
 
 ```bash
 flutter pub get
 ```
 
-Opcional — apontar para API local:
-
-```bash
-flutter run --dart-define=VAULT_BACKEND_URL=http://127.0.0.1:8080
-```
+Isto descarrega tudo o que a app precisa para correr.
 
 ---
 
-## Windows (PC)
+### 2. No Windows
 
-### Dependências de sistema
+**O que instalar uma vez:**
 
-- Windows **10 / 11** (x64)
-- [Visual Studio 2022](https://visualstudio.microsoft.com/) com workload **Desktop development with C++**
-- CMake (incluído no VS)
-- Desktop Windows activado no Flutter
+1. Visual Studio 2022 com a opção **Desenvolvimento para ambiente de trabalho com C++**
+2. Activar o suporte Windows no Flutter:
 
 ```bash
 flutter config --enable-windows-desktop
 flutter doctor
 ```
 
-### Correr e build
+O `flutter doctor` deve ficar sem erros vermelhos nos pontos de Windows.
+
+**Abrir a app:**
 
 ```bash
-# debug
 flutter run -d windows
+```
 
-# release
+**Gerar versão final (instalável / pasta Release):**
+
+```bash
 flutter build windows --release
 ```
 
-Saída típica:
-
-```text
-build\windows\x64\runner\Release\
-```
-
-Áudio desktop: `media_kit_libs_windows_audio`.
+A pasta pronta fica em `build\windows\x64\runner\Release\`.
 
 ---
 
-## Linux
+### 3. No Linux
 
-### Dependências de sistema
-
-Debian / Ubuntu (exemplo):
+**O que instalar uma vez** (exemplo Ubuntu / Debian):
 
 ```bash
 sudo apt update
 sudo apt install -y \
   clang cmake ninja-build pkg-config \
-  libgtk-3-dev \
-  liblzma-dev \
-  libstdc++-12-dev \
-  libmpv-dev mpv \
-  libasound2-dev
+  libgtk-3-dev liblzma-dev \
+  libmpv-dev mpv libasound2-dev
 ```
 
-O runner usa **GTK 3** (`linux/CMakeLists.txt` → `gtk+-3.0`).
+Depois:
 
 ```bash
 flutter config --enable-linux-desktop
 flutter doctor
 ```
 
-### Correr e build
+**Abrir a app:**
 
 ```bash
-# debug
 flutter run -d linux
+```
 
-# release
+**Gerar versão final:**
+
+```bash
 flutter build linux --release
 ```
 
-Bundle típico:
-
-```text
-build/linux/x64/release/bundle/
-```
-
-Áudio desktop: `media_kit_libs_linux`.
+A pasta pronta fica em `build/linux/x64/release/bundle/`.
 
 ---
 
-## Dependências Dart
+## O que a app usa por baixo (em linguagem simples)
 
-Principais pacotes em [`pubspec.yaml`](pubspec.yaml):
+Não precisas de memorizar isto para usar — só se fores desenvolver ou empacotar.
 
-| Pacote | Função |
+| Área | Em poucas palavras |
 |---|---|
-| `pdfrx` | Leitor PDF |
-| `archive` · `rar` | CBZ/ZIP e CBR/RAR |
-| `file_picker` · `path_provider` · `path` | Ficheiros e paths |
-| `sherpa_onnx` | TTS Piper offline |
-| `just_audio` · `audio_service` · `audio_session` | Playback |
-| `just_audio_media_kit` + libs Windows/Linux | Áudio no desktop |
-| `dio` | HTTP |
-| `flutter_secure_storage` | Tokens |
-| `shared_preferences` | Preferências |
-| `sentry_flutter` | Crash reporting (opcional) |
-| `share_plus` · `url_launcher` · `package_info_plus` | Share / links / versão |
-| `wakelock_plus` | Ecrã ligado na leitura |
-| `google_fonts` · `showcaseview` | UI / tutoriais |
-| `flutter_localizations` · `intl` | i18n |
+| Interface | Flutter — uma base, várias plataformas |
+| Abrir PDFs | Motor de leitura PDF integrado |
+| Comics | Suporte a pastas ZIP (CBZ) e RAR (CBR) |
+| Voz | TTS offline (não depende da internet para falar) |
+| Conta e sync | Liga a um servidor Vault (backend à parte) |
+| Preferências | Guardadas no dispositivo de forma segura |
 
-Assets TTS: [`assets/tts/`](assets/tts/) (espeak-ng-data + vozes PT-BR Cadu / Faber / Dii).
+Vozes em português já vêm empacotadas; podes gerir / acrescentar vozes dentro da app.
 
 ---
 
-## Configuração
+## Ligar a um servidor (opcional)
 
-| Variável (`--dart-define`) | Uso |
-|---|---|
-| `VAULT_BACKEND_URL` | Raiz da API (sem `/v1`) |
-| `SENTRY_DSN` | Crash reporting (opcional) |
-| `VAULT_CREATOR_USER_ID` | ID do perfil criador (opcional) |
+Por defeito a app aponta para o servidor configurado no projecto.
 
-Exemplos:
+Se estiveres a desenvolver com API local:
 
 ```bash
 flutter run -d windows --dart-define=VAULT_BACKEND_URL=http://127.0.0.1:8080
-flutter run -d linux   --dart-define=SENTRY_DSN=https://...
 ```
 
-Sem override, a URL default está em [`lib/config/vault_backend_config.dart`](lib/config/vault_backend_config.dart).
+(O mesmo funciona com `-d linux`.)
 
 ---
 
-## Estrutura do projecto
+## Privacidade, em resumo
 
 ```text
-lib/
-  screens/      # UI — biblioteca, leitores, conta, social, discover…
-  services/     # import, sync, TTS, APIs, stores
-  models/       # modelos de dados
-  widgets/      # componentes
-  l10n/         # traduções
-  config/       # backend / defines
-windows/        # runner desktop Windows
-linux/          # runner desktop Linux
-assets/         # ícone, atmosfera, TTS
+  Ficheiros  ──►  ficam no teu PC / Linux
+  Progresso  ──►  pode sincronizar (com login)
+  Anotações  ──►  podem sincronizar
+  Estante pública  ──►  só se activares
 ```
 
----
-
-## Privacidade e segurança
-
-- Tokens em **secure storage**; sync **sem** ficheiros binários
-- Social e Discover são **opt-in**
-- Sentry sem senhas / tokens em cleartext
-- **Não** commits secrets (`SENTRY_DSN`, API keys) no git
-
----
-
-## Notas
-
-- Versão da app: campo `version` em [`pubspec.yaml`](pubspec.yaml)
-- Roadmap interno (se existir no clone): [`PLANOS.md`](PLANOS.md)
-- Builds de release: correr **localmente** (`flutter build windows` / `flutter build linux`)
+Não commits palavras-passe, tokens ou chaves de serviços no Git.
 
 ---
 
 <p align="center">
-  <sub>Vault · leitura no teu ritmo</sub>
+  <br/>
+  <strong>Vault</strong><br/>
+  <em>Lê no teu ritmo. A estante é tua.</em>
+  <br/><br/>
+  <sub>Versão 2.0.1 · nome interno <code>hq_reader</code></sub>
 </p>
